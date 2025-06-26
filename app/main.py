@@ -16,8 +16,7 @@ class Animal:
         return (
             f"{{Name: {self.name}, "
             f"Health: {self.health}, "
-            f"Hidden: {self.hidden}"
-            f"}}"
+            f"Hidden: {self.hidden}}}"
         )
 
 
@@ -28,11 +27,8 @@ class Herbivore(Animal):
 
 
 class Carnivore(Animal):
-
-    @staticmethod
-    def bite(animal: Herbivore) -> None:
-        if not animal.hidden and isinstance(animal, Herbivore):
+    def bite(self, animal: Herbivore) -> None:
+        if animal.hidden is False and isinstance(animal, Herbivore):
             animal.health -= 50
-        if animal.health <= 0:
-            if animal in Animal.alive:
-                Animal.alive.remove(animal)
+        if animal in Animal.alive and animal.health <= 0:
+            Animal.alive.remove(animal)
